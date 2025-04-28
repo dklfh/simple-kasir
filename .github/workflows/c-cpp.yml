@@ -12,15 +12,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y autoconf automake libtool
-    - name: Generate configure script
-      run: autoreconf -i
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+
+    - name: Install GCC
+      run: sudo apt-get update && sudo apt-get install -y gcc
+
+    - name: Compile the program
+      run: gcc -o simple-kasir main.c
+
+    - name: Run the program
+      run: ./simple-kasir
