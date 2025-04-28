@@ -13,11 +13,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install GCC
-      run: sudo apt-get update && sudo apt-get install -y gcc
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential
 
     - name: Compile the program
-      run: gcc -o simple-kasir main.c
+      run: gcc main.c -o kasir-app
 
-    - name: Run the program
-      run: ./simple-kasir
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: kasir-app
+        path: kasir-app
